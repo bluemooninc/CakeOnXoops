@@ -16,7 +16,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-$cakeDescription = __d('cake_dev', 'Cake on Xoops: the rapid development php framework');
+$cakeDescription = __d('cake_dev', 'CakeOnXoops: the rapid development php CMS framework');
 
 
 require_once('../../../../mainfile.php');

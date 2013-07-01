@@ -1,10 +1,10 @@
 <?php
 
 $modversion['name'] = 'cakeCMS';
-$modversion['version'] = '0.01';
+$modversion['version'] = '2.36';
 $modversion['description'] = 'cakeCMS';
 $modversion['author'] = 'Bluemoon inc.';
-//$modversion['image'] = 'logo.png';
+$modversion['image'] = 'logo.jpg';
 $modversion['dirname'] = 'cakecms';
 
 $modversion['hasMain'] = 1;

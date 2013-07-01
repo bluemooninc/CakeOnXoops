@@ -229,7 +229,6 @@
  * Uncomment this line and correct your server timezone to fix 
  * any date & time related errors.
  */
-	// by Yoshi
 	date_default_timezone_set('Asia/Tokyo');
 
 /**
@@ -332,4 +331,3 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
-
