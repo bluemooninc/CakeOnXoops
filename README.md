@@ -1,5 +1,5 @@
-xCake is CakePHP on XOOPS
--------------------------
+Cake on Xoops Ver2.3.6
+----------------------
 
 1. install
 

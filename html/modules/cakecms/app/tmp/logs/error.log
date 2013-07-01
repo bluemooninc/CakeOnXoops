@@ -1,1 +1,84 @@
-Heck
+2013-07-01 23:07:22 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:07:57 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:09:03 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:09:18 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:10:47 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:18:07 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:18:13 Error: [MissingControllerException] Controller class HogeController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:18:13 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:23:46 Error: [MissingControllerException] Controller class HogeController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:23:46 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:24:41 Error: [MissingControllerException] Controller class HogeController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:24:41 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:25:25 Error: [MissingControllerException] Controller class HogeController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:25:26 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:25:53 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:33:43 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:35:10 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:35:13 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:35:27 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:50:39 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /xoopsec/html/modules/cakecms/css/custom-theme/jquery-ui-1.8.16.custom.css
+Stack Trace:
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:50:58 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /xoopsec/html/modules/cakecms/css/custom-theme/jquery-ui-1.8.16.custom.css
+Stack Trace:
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-01 23:51:02 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /xoopsec/html/modules/cakecms/css/custom-theme/jquery-ui-1.8.16.custom.css
+Stack Trace:
+#0 /Users/bluemooninc/PhpstormProjects/xoopsec/html/modules/cakecms/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

@@ -4,18 +4,20 @@
  *
  * PHP 5
  *
- * CakePHP(tm) Tests <http://book.cakephp.org/view/1196/Testing>
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://book.cakephp.org/view/1196/Testing CakePHP(tm) Tests
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @package       Cake.Test.Case.Network.Email
  * @since         CakePHP(tm) v 2.0.0
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 App::uses('CakeEmail', 'Network/Email');
 App::uses('AbstractTransport', 'Network/Email');
 App::uses('SmtpTransport', 'Network/Email');
@@ -52,7 +54,6 @@ class SmtpTestTransport extends SmtpTransport {
  * @return void
  */
 	protected function _generateSocket() {
-		return;
 	}
 
 /**
@@ -82,7 +83,7 @@ class SmtpTransportTest extends CakeTestCase {
  */
 	public function setUp() {
 		if (!class_exists('MockSocket')) {
-			$this->getMock('CakeSocket', array('read', 'write', 'connect'), array(), 'MockSocket');
+			$this->getMock('CakeSocket', array('read', 'write', 'connect', 'enableCrypto'), array(), 'MockSocket');
 		}
 		$this->socket = new MockSocket();
 
@@ -104,6 +105,70 @@ class SmtpTransportTest extends CakeTestCase {
 		$this->socket->expects($this->at(3))->method('read')->will($this->returnValue(false));
 		$this->socket->expects($this->at(4))->method('read')->will($this->returnValue("250 Accepted\r\n"));
 		$this->SmtpTransport->connect();
+	}
+
+/**
+ * testConnectEhloTls method
+ *
+ * @return void
+ */
+	public function testConnectEhloTls() {
+		$this->SmtpTransport->config(array('tls' => true));
+		$this->socket->expects($this->any())->method('connect')->will($this->returnValue(true));
+		$this->socket->expects($this->at(0))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(1))->method('read')->will($this->returnValue("220 Welcome message\r\n"));
+		$this->socket->expects($this->at(2))->method('write')->with("EHLO localhost\r\n");
+		$this->socket->expects($this->at(3))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(4))->method('read')->will($this->returnValue("250 Accepted\r\n"));
+		$this->socket->expects($this->at(5))->method('write')->with("STARTTLS\r\n");
+		$this->socket->expects($this->at(6))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(7))->method('read')->will($this->returnValue("220 Server ready\r\n"));
+		$this->socket->expects($this->at(8))->method('other')->with('tls')->will($this->returnValue(true));
+		$this->socket->expects($this->at(9))->method('write')->with("EHLO localhost\r\n");
+		$this->socket->expects($this->at(10))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(11))->method('read')->will($this->returnValue("250 Accepted\r\n"));
+		$this->SmtpTransport->connect();
+	}
+
+/**
+ * testConnectEhloTlsOnNonTlsServer method
+ *
+ * @expectedException SocketException
+ * @return void
+ */
+	public function testConnectEhloTlsOnNonTlsServer() {
+		$this->SmtpTransport->config(array('tls' => true));
+		$this->socket->expects($this->any())->method('connect')->will($this->returnValue(true));
+		$this->socket->expects($this->at(0))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(1))->method('read')->will($this->returnValue("220 Welcome message\r\n"));
+		$this->socket->expects($this->at(2))->method('write')->with("EHLO localhost\r\n");
+		$this->socket->expects($this->at(3))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(4))->method('read')->will($this->returnValue("250 Accepted\r\n"));
+		$this->socket->expects($this->at(5))->method('write')->with("STARTTLS\r\n");
+		$this->socket->expects($this->at(6))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(7))->method('read')->will($this->returnValue("500 5.3.3 Unrecognized command\r\n"));
+		$this->SmtpTransport->connect();
+	}
+
+/**
+ * testConnectEhloNoTlsOnRequiredTlsServer method
+ *
+ * @expectedException SocketException
+ * @return void
+ */
+	public function testConnectEhloNoTlsOnRequiredTlsServer() {
+		$this->SmtpTransport->config(array('tls' => false, 'username' => 'user', 'password' => 'pass'));
+		$this->socket->expects($this->any())->method('connect')->will($this->returnValue(true));
+		$this->socket->expects($this->at(0))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(1))->method('read')->will($this->returnValue("220 Welcome message\r\n"));
+		$this->socket->expects($this->at(2))->method('write')->with("EHLO localhost\r\n");
+		$this->socket->expects($this->at(3))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(4))->method('read')->will($this->returnValue("250 Accepted\r\n"));
+		$this->socket->expects($this->at(5))->method('read')->with("AUTH LOGIN\r\n");
+		$this->socket->expects($this->at(6))->method('read')->will($this->returnValue(false));
+		$this->socket->expects($this->at(7))->method('read')->will($this->returnValue("504 5.7.4 Unrecognized authentication type\r\n"));
+		$this->SmtpTransport->connect();
+		$this->SmtpTransport->auth();
 	}
 
 /**
@@ -220,14 +285,16 @@ class SmtpTransportTest extends CakeTestCase {
 		$email->bcc('phpnut@cakephp.org');
 		$email->messageID('<4d9946cf-0a44-4907-88fe-1d0ccbdd56cb@localhost>');
 		$email->subject('Testing SMTP');
-		$email->expects($this->any())->method('message')->will($this->returnValue(array('First Line', 'Second Line', '')));
+		$date = date(DATE_RFC2822);
+		$email->setHeaders(array('X-Mailer' => SmtpCakeEmail::EMAIL_CLIENT, 'Date' => $date));
+		$email->expects($this->any())->method('message')->will($this->returnValue(array('First Line', 'Second Line', '.Third Line', '')));
 
 		$data = "From: CakePHP Test <noreply@cakephp.org>\r\n";
 		$data .= "Return-Path: CakePHP Return <pleasereply@cakephp.org>\r\n";
 		$data .= "To: CakePHP <cake@cakephp.org>\r\n";
 		$data .= "Cc: Mark Story <mark@cakephp.org>, Juan Basso <juan@cakephp.org>\r\n";
 		$data .= "X-Mailer: CakePHP Email\r\n";
-		$data .= "Date: " . date(DATE_RFC2822) . "\r\n";
+		$data .= "Date: " . $date . "\r\n";
 		$data .= "Message-ID: <4d9946cf-0a44-4907-88fe-1d0ccbdd56cb@localhost>\r\n";
 		$data .= "Subject: Testing SMTP\r\n";
 		$data .= "MIME-Version: 1.0\r\n";
@@ -236,6 +303,7 @@ class SmtpTransportTest extends CakeTestCase {
 		$data .= "\r\n";
 		$data .= "First Line\r\n";
 		$data .= "Second Line\r\n";
+		$data .= "..Third Line\r\n"; // RFC5321 4.5.2.Transparency
 		$data .= "\r\n";
 		$data .= "\r\n\r\n.\r\n";
 
@@ -258,6 +326,23 @@ class SmtpTransportTest extends CakeTestCase {
 	public function testQuit() {
 		$this->socket->expects($this->at(0))->method('write')->with("QUIT\r\n");
 		$this->SmtpTransport->disconnect();
+	}
+
+/**
+ * testEmptyConfigArray method
+ *
+ * @return void
+ */
+	public function testEmptyConfigArray() {
+		$expected = $this->SmtpTransport->config(array(
+			'client' => 'myhost.com',
+			'port' => 666
+		));
+
+		$this->assertEquals(666, $expected['port']);
+
+		$result = $this->SmtpTransport->config(array());
+		$this->assertEquals($expected, $result);
 	}
 
 }

@@ -6,24 +6,25 @@
  *
  * PHP 5
  *
- * CakePHP(tm) Tests <http://book.cakephp.org/view/1196/Testing>
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://book.cakephp.org/view/1196/Testing CakePHP(tm) Tests
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @package       Cake.Test.Case.Controller
  * @since         CakePHP(tm) v 1.2.3
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 App::uses('Controller', 'Controller');
 
 /**
  * Test case AppController
  *
- * @package       Cake.Test.Case.Controller
  * @package       Cake.Test.Case.Controller
  */
 class MergeVarsAppController extends Controller {
@@ -58,13 +59,6 @@ class MergeVarComponent extends Object {
  * @package       Cake.Test.Case.Controller
  */
 class MergeVariablesController extends MergeVarsAppController {
-
-/**
- * name
- *
- * @var string
- */
-	public $name = 'MergeVariables';
 
 /**
  * uses
@@ -118,13 +112,6 @@ class MergeVarPluginAppController extends MergeVarsAppController {
 class MergePostsController extends MergeVarPluginAppController {
 
 /**
- * name
- *
- * @var string
- */
-	public $name = 'MergePosts';
-
-/**
  * uses
  *
  * @var array
@@ -150,7 +137,7 @@ class ControllerMergeVarsTest extends CakeTestCase {
 		$Controller->constructClasses();
 
 		$expected = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => false));
-		$this->assertEquals($Controller->components, $expected, 'Duplication of settings occured. %s');
+		$this->assertEquals($expected, $Controller->components, 'Duplication of settings occurred. %s');
 	}
 
 /**
@@ -164,7 +151,7 @@ class ControllerMergeVarsTest extends CakeTestCase {
 		$Controller->constructClasses();
 
 		$expected = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => true, 'remote'));
-		$this->assertEquals($Controller->components, $expected, 'Merging of settings is wrong. %s');
+		$this->assertEquals($expected, $Controller->components, 'Merging of settings is wrong. %s');
 	}
 
 /**
@@ -177,7 +164,7 @@ class ControllerMergeVarsTest extends CakeTestCase {
 		$Controller->constructClasses();
 
 		$expected = array('MergeVar' => array('format' => 'html', 'terse'));
-		$this->assertEquals($Controller->helpers, $expected, 'Duplication of settings occured. %s');
+		$this->assertEquals($expected, $Controller->helpers, 'Duplication of settings occurred. %s');
 	}
 
 /**
@@ -196,7 +183,7 @@ class ControllerMergeVarsTest extends CakeTestCase {
 			'Custom' => null,
 			'Foo' => array('something')
 		);
-		$this->assertSame($Controller->helpers, $expected, 'Order is incorrect.');
+		$this->assertSame($expected, $Controller->helpers, 'Order is incorrect.');
 	}
 
 /**
@@ -249,4 +236,17 @@ class ControllerMergeVarsTest extends CakeTestCase {
 
 		$this->assertFalse(isset($Controller->Session));
 	}
+
+/**
+ * Ensure that $modelClass is correct even when Controller::$uses
+ * has been iterated, eg: by a Component, or event handlers.
+ */
+	public function testMergeVarsModelClass() {
+		$Controller = new MergeVariablescontroller();
+		$Controller->uses = array('Test', 'TestAlias');
+		$lastModel = end($Controller->uses);
+		$Controller->constructClasses();
+		$this->assertEquals($Controller->uses[0], $Controller->modelClass);
+	}
+
 }
