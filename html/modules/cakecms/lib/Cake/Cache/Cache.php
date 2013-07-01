@@ -512,7 +512,7 @@ abstract class CacheEngine {
 			$settings
 		);
 		if (!is_numeric($this->settings['duration'])) {
-			$this->settings['duration'] = strtotime($this->settings['duration']) - time();
+//			$this->settings['duration'] = strtotime($this->settings['duration']) - time();
 		}
 		return true;
 	}
